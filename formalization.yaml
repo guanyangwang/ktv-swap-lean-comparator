@@ -1,0 +1,98 @@
+# formalization.yaml (v0.3): repo-root metadata for formalization projects.
+# Schema: https://github.com/mathlib-initiative/formalization.yaml
+
+version: "v0.3"
+
+project:
+  name: "KTV Swap Chain Comparator"
+  authors:
+    - "Guanyang Wang"
+  license: "MIT"
+
+sources:
+  - title: "Spectral Gap for the Binary Fixed-Margin Swap Chain"
+    authors:
+      - "Weibo Fu"
+      - "Qian Qin"
+      - "Guanyang Wang"
+    id: "arXiv:2606.22636, Theorem 2.2"
+    link: "https://arxiv.org/abs/2606.22636"
+    type: "preprint"
+    license: ""
+    author_contacted: "n/a"
+    prior_work: ""
+
+status:
+  scope: >
+    Comparator wrapper for the Mathlib-only statement of the fixed-margin lazy
+    swap-chain spectral-gap theorem. Challenge.lean imports only Mathlib and
+    states the theorem. Solution.lean imports the ktv-swap-lean proof library
+    and proves the same statement.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "KTV.Johnson.MathlibOnly.binaryFixedMarginLazySwapChain_spectralGap_card"
+      file: "Solution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator.json"
+      literature_dependencies: []
+  notes: >
+    The sorry_count is for Solution.lean and the imported proof library.
+    Challenge.lean intentionally contains the statement hole that comparator
+    checks against Solution.lean.
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "GPT-5 / Codex"
+      framework: "OpenAI Codex / ChatGPT coding agent"
+      tool_setup: >
+        Codex prepared the standalone comparator repository, the Mathlib-only
+        challenge statement, the solution bridge to ktv-swap-lean, and the
+        verification script following the leanprover/comparator pattern.
+      cost:
+        wall_time: "not recorded"
+        spend_usd: "not recorded"
+        hardware: "local macOS development machine; API-based assistant"
+      prompting_notes: >
+        Human prompts directed Codex to make an independent comparator
+        repository modeled on kim-em/erdos-unit-distance-comparator, while
+        leaving the main ktv-swap-lean repository unchanged.
+  spend_usd: "not recorded"
+  notes: ""
+
+fidelity:
+  divergences: >
+    The comparator theorem states the result as an
+    OperatorSpectralGapAtLeast Poincare/Dirichlet-form inequality over rational
+    functions on a finite state space, rather than as an eigenvalue statement.
+    The statement uses ordered distinct row and column pairs; for this swap
+    operator this is equivalent to the paper's unordered-pair proposal because
+    each unordered rectangle has four ordered representatives producing the
+    same swap result. Row and column index sets are arbitrary finite types.
+
+review:
+  status: "self-assessed"
+  reviewers: []
+  notes: >
+    This repository is intended to be checked by comparator via ./verify.sh.
+    A trusted comparator run should be performed on Linux with real landrun or
+    systemd-run sandboxing.
+
+alignment:
+  namespace: "KTV.Johnson.MathlibOnly"
+  statements:
+    - source: "Theorem 2.2 of Spectral Gap for the Binary Fixed-Margin Swap Chain"
+      lean: "KTV.Johnson.MathlibOnly.binaryFixedMarginLazySwapChain_spectralGap_card"
+      module: "Challenge.lean / Solution.lean"
+      status: "proved"
+      note: "Challenge.lean imports exactly Mathlib; Solution.lean imports ktv-swap-lean."
+
+acknowledgements: >
+  Built on Lean 4, Mathlib, ktv-swap-lean, and leanprover/comparator.

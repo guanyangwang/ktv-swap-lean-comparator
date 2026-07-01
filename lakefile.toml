@@ -1,0 +1,20 @@
+name = "ktv_swap_lean_comparator"
+version = "0.1.0"
+keywords = ["math", "markov-chain", "spectral-gap", "comparator"]
+defaultTargets = ["Challenge", "Solution"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.31.0"
+
+[[require]]
+name = "ktv_proof"
+git = "https://github.com/guanyangwang/ktv-swap-lean"
+rev = "15b5f47c9ac833bfdf99b8b29374af7a678ef4bc"
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"
