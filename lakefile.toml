@@ -14,6 +14,9 @@ git = "https://github.com/guanyangwang/ktv-swap-lean"
 rev = "15b5f47c9ac833bfdf99b8b29374af7a678ef4bc"
 
 [[lean_lib]]
+name = "ChallengeDefs"
+
+[[lean_lib]]
 name = "Challenge"
 
 [[lean_lib]]

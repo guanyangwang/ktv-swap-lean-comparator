@@ -7,26 +7,23 @@ Chain*.
 
 ## What to audit
 
-Only `Challenge.lean`, which imports only Mathlib. It defines:
+Audit `ChallengeDefs.lean` and `Challenge.lean`. `ChallengeDefs.lean` imports only Mathlib and defines:
 
 - binary matrices with prescribed row and column sums;
 - the ordered-distinct rectangle proposal;
 - the `1/2`-lazy swap operator;
 - the finite rational Poincare/Dirichlet-form spectral-gap predicate.
 
-It then states that the lazy swap operator has gap at least
+`Challenge.lean` then states that the lazy swap operator has gap at least
 
 ```text
 1 / choose(|Col|, 2) * 1 / choose(|Row|, 2).
 ```
 
-If you believe `Challenge.lean` says the intended theorem, then a successful
-comparator run certifies that the `ktv-swap-lean` library proves it using only
+If you believe `ChallengeDefs.lean` and `Challenge.lean` say the intended theorem, then a successful comparator run certifies that the `ktv-swap-lean` library proves it using only
 the axioms `propext`, `Quot.sound`, and `Classical.choice`.
 
-`Solution.lean` imports the KTV proof library, restates the challenge
-definitions, and bridges the Mathlib-only statement to the library theorem by
-an explicit equivalence of state spaces. Comparator rebuilds both modules in a
+`Solution.lean` imports `ChallengeDefs.lean` and the KTV proof library, then bridges the Mathlib-only statement to the library theorem by an explicit equivalence of state spaces. Comparator rebuilds both modules in a
 sandbox, exports them with `lean4export`, compares the statements, checks the
 axioms, and replays the proof through the Lean kernel.
 
