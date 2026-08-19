@@ -38,6 +38,8 @@ classification:
     - "cs.DS"
     - "math.CO"
     - "stat.CO"
+  msc2020:
+    - "60J10"
 
 status:
   scope: >
