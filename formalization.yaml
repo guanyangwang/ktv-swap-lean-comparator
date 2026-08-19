@@ -44,10 +44,10 @@ classification:
 status:
   scope: >
     Comparator wrapper for the Mathlib-only statement of the fixed-margin lazy
-    swap-chain spectral-gap theorem. ChallengeDefs.lean imports only Mathlib,
-    Challenge.lean states the theorem, and Solution.lean imports
-    ChallengeDefs.lean and the ktv-swap-lean proof library to prove the same
-    statement.
+    swap-chain spectral-gap theorem. Challenge.lean is a self-contained
+    Mathlib-only challenge containing the definitions needed to state the
+    theorem. Solution.lean imports ChallengeDefs.lean and the ktv-swap-lean
+    proof library to prove the same statement.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -116,8 +116,9 @@ alignment:
       module: "Challenge.lean / Solution.lean"
       status: "proved"
       note: >
-        ChallengeDefs.lean imports exactly Mathlib; Challenge.lean imports
-        ChallengeDefs; Solution.lean imports ktv-swap-lean.
+        Challenge.lean imports only Mathlib and contains the definitions needed
+        for the standalone challenge; Solution.lean imports ChallengeDefs.lean
+        and ktv-swap-lean.
 
 acknowledgements: >
   Built on Lean 4, Mathlib, ktv-swap-lean, and leanprover/comparator.
