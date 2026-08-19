@@ -5,6 +5,9 @@ version: "v0.4"
 
 project:
   name: "KTV Swap Chain Comparator"
+  description: >
+    Lean 4 formalization and Comparator verification of the spectral-gap theorem
+    for the lazy swap chain on binary contingency tables with fixed margins.
   authors:
     - "Guanyang Wang"
   responsible_maintainers:
