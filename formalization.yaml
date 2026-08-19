@@ -1,13 +1,21 @@
-# formalization.yaml (v0.3): repo-root metadata for formalization projects.
-# Schema: https://github.com/mathlib-initiative/formalization.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml (v0.4): repo-root metadata for formalization projects.
 
-version: "v0.3"
+version: "v0.4"
 
 project:
   name: "KTV Swap Chain Comparator"
   authors:
     - "Guanyang Wang"
+  responsible_maintainers:
+    - "Guanyang Wang"
   license: "MIT"
+
+repository:
+  role: "thin-wrapper"
+  substantive_formalization:
+    id: "https://github.com/guanyangwang/ktv-swap-lean"
+    revision: "15b5f47c9ac833bfdf99b8b29374af7a678ef4bc"
 
 sources:
   - title: "Spectral Gap for the Binary Fixed-Margin Swap Chain"
@@ -15,12 +23,18 @@ sources:
       - "Weibo Fu"
       - "Qian Qin"
       - "Guanyang Wang"
-    id: "arXiv:2606.22636, Theorem 2.2"
-    link: "https://arxiv.org/abs/2606.22636"
+    id: "arXiv:2606.22636"
     type: "preprint"
+    location: "Theorem 2.2"
+    relationship: "formalizes"
     license: ""
-    author_contacted: "n/a"
-    prior_work: ""
+
+classification:
+  arxiv:
+    - "math.PR"
+    - "cs.DS"
+    - "math.CO"
+    - "stat.CO"
 
 status:
   scope: >
@@ -39,12 +53,15 @@ status:
     - declaration: "KTV.Johnson.MathlibOnly.binaryFixedMarginLazySwapChain_spectralGap_card"
       file: "Solution.lean"
       sorry_count: 0
-      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
       comparator_config: "comparator.json"
       literature_dependencies: []
   notes: >
     The sorry_count is for Solution.lean and the imported proof library.
-    Challenge.lean intentionally contains the statement hole that comparator
+    Challenge.lean intentionally contains the statement hole that Comparator
     checks against Solution.lean.
 
 automation:
@@ -93,7 +110,9 @@ alignment:
       lean: "KTV.Johnson.MathlibOnly.binaryFixedMarginLazySwapChain_spectralGap_card"
       module: "Challenge.lean / Solution.lean"
       status: "proved"
-      note: "ChallengeDefs.lean imports exactly Mathlib; Challenge.lean imports ChallengeDefs; Solution.lean imports ktv-swap-lean."
+      note: >
+        ChallengeDefs.lean imports exactly Mathlib; Challenge.lean imports
+        ChallengeDefs; Solution.lean imports ktv-swap-lean.
 
 acknowledgements: >
   Built on Lean 4, Mathlib, ktv-swap-lean, and leanprover/comparator.
